@@ -89,17 +89,17 @@ public:
     
 	// P1
 
-    List() : fRoot(nullptr),fCount(0){}                                     // default constructor
+    List() : fRoot(nullptr),fCount(0){}                  // default constructor
 
-	bool empty() const {
+	bool empty() const {                                 // Is list empty?
         if (fCount == 0){
             return true;
         }
         return false;
-    }	                        // Is list empty?
-	size_t size() const{ return fCount; }                		// list size
+    }	                       
+	size_t size() const{ return fCount; }               // list size
 
-	void push_front( const T& aElement ){
+	void push_front( const T& aElement ){               // adds aElement at front
         Node* lNode = new Node(aElement);
         if(fRoot == nullptr)
         {
@@ -108,16 +108,16 @@ public:
             fRoot = &fRoot -> push_front(*lNode);
         }
         fCount++;
-    }	    // adds aElement at front
+    }	   
 
-    Iterator begin() const{return Iterator(fRoot).begin();}                     // return a forward iterator
-    Iterator end() const{return Iterator(fRoot).end();}                       // return a forward end iterator
-    Iterator rbegin() const{return Iterator(fRoot).rbegin();}                    // return a backwards iterator
-    Iterator rend() const{ return Iterator(fRoot).rend();}                      // return a backwards end iterator
+    Iterator begin() const{return Iterator(fRoot).begin();}             // return a forward iterator
+    Iterator end() const{return Iterator(fRoot).end();}                 // return a forward end iterator
+    Iterator rbegin() const{return Iterator(fRoot).rbegin();}           // return a backwards iterator
+    Iterator rend() const{ return Iterator(fRoot).rend();}              // return a backwards end iterator
 
 	// P2
 	
-	void push_back( const T& aElement ) {
+	void push_back( const T& aElement ) {               // adds aElement at back
         Node* lNode = new Node(aElement);
         if(fRoot == nullptr){
             fRoot = lNode;
@@ -125,11 +125,11 @@ public:
             fRoot -> push_front(*lNode);
         }
         fCount++;
-    }        // adds aElement at back
+    }        
 
 	// P3
 
-    const T& operator[]( size_t aIndex ) const{
+    const T& operator[]( size_t aIndex ) const{         // list indexer
         if(aIndex >= fCount){
             throw std::out_of_range("Index out of bounds.");
         }
@@ -138,14 +138,14 @@ public:
             lNode = const_cast<Node*>(&lNode->getNext());
         }
         return **lNode;
-    }	// list indexer
+    }	
 
 	// P4
 	
-    List( const List& aOtherList ): fRoot(nullptr),fCount(0) {
+    List( const List& aOtherList ): fRoot(nullptr),fCount(0) {   // copy constructor
         *this = aOtherList;
-    }             // copy constructor
-    List& operator=( const List& aOtherList ){
+    }           
+    List& operator=( const List& aOtherList ){          // assignment operator
         if( this != &aOtherList)
         {
             this-> ~List();
@@ -156,15 +156,18 @@ public:
             }
         }
         return *this;
-    }	// assignment operator
+    }	
     
 	// P5
 
-    List( List&& aOtherList ) : fRoot(aOtherList.fRoot),fCount(aOtherList.fCount){
+    List( List&& aOtherList ) :                         // move constructor
+        fRoot(aOtherList.fRoot),
+        fCount(aOtherList.fCount)
+    { 
         aOtherList.fRoot = nullptr;
         aOtherList.fCount = 0;
-    }            		// move constructor
-    List& operator=( List&& aOtherList ){
+    }            		
+    List& operator=( List&& aOtherList ){               // move assignment operator
         if(this != &aOtherList){
             this -> ~List();
             
@@ -175,9 +178,9 @@ public:
             aOtherList.fCount = 0;
         }
         return *this;
-    }       // move assignment operator
+    }      
 
-    void push_front( T&& aElement ){
+    void push_front( T&& aElement ){                    // move push_front
         Node* lNode = new Node(std::move(aElement));
         if(fRoot == nullptr){
             fRoot = lNode;
@@ -188,8 +191,8 @@ public:
         }
         fCount++;
 
-    }			// move push_front
-    void push_back( T&& aElement ){
+    }			
+    void push_back( T&& aElement ){                     // move push_back
         Node* lNode = new Node(std::move(aElement));
         if(fRoot == nullptr){
             fRoot = lNode;
@@ -197,6 +200,6 @@ public:
             fRoot -> push_front(*lNode);
         }
         fCount++;
-    }				// move push_back
+    }				
 };
 
