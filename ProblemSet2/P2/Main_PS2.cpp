@@ -91,7 +91,7 @@ void runP2()
     // Use a lambda expression here that orders integers in increasing order.
     // The lambda expression does not capture any variables of throws any exceptions.
     // It has to return a bool value.
-   lVector.sort([](int aLeft, int aRight) { return aLeft <= aRight; } );
+    lVector.sort([](int aLeft, int aRight) { return aLeft <= aRight; } );
 // (10)
     
     cout << "After sorting:" << endl;
@@ -99,10 +99,9 @@ void runP2()
     for ( size_t i = 0; i < lVector.size(); i++ )
     {
         cout << lVector[i] << ' ';
-    }
-
+    }   
     cout << endl;
-}
+}   
 
 #endif
 

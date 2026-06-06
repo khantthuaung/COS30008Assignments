@@ -1,10 +1,7 @@
 #include "SortableIntVector.h"
 
 // Constructor
-SortableIntVector::SortableIntVector(const int aArrayOfIntegers[], size_t aNumberOfElements)
-    : IntVector(aArrayOfIntegers, aNumberOfElements)
-{
-}
+SortableIntVector::SortableIntVector(const int aArrayOfIntegers[], size_t aNumberOfElements): IntVector(aArrayOfIntegers, aNumberOfElements){}
 
 // Bubble Sort
 void SortableIntVector::sort(Comparable aOrderFunction)
